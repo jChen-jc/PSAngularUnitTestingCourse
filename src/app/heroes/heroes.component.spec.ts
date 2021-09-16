@@ -15,7 +15,7 @@ describe('HeroesComponent', () => {
     ]
 
     // mock functions
-    mockHeroService = jasmine.createSpyObj(['getHeros', 'addHero', 'deleteHero'])
+    mockHeroService = jasmine.createSpyObj(['getHeroes', 'addHero', 'deleteHero'])
     // pass the required server to component
     component = new HeroesComponent(mockHeroService)
   })
