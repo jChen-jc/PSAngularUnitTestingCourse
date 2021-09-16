@@ -100,7 +100,7 @@ describe('HeroesComponent (deep tests)', () => {
         mockHeroService.getHeroes.and.returnValue(of(HEROES));
         fixture.detectChanges();
         const heroComps = fixture.debugElement.queryAll(By.directive(HeroComponent));
-
+        //???? 
         let routerLink = heroComps[0].query(By.directive(RouterLinkDirectiveStub)).injector.get(RouterLinkDirectiveStub)
     
         heroComps[0].query(By.css('a')).triggerEventHandler('click', null);

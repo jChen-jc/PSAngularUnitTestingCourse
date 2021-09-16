@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { ComponentFixture, fakeAsync, flush, TestBed, tick, waitForAsync } from "@angular/core/testing"
 import { ActivatedRoute } from "@angular/router";
 import { Location } from '@angular/common';
 
@@ -43,4 +43,41 @@ describe('HeroDetailComponent', () => {
     expect(fixture.nativeElement.querySelector('h2').textContent).toContain('BOYS')
   })
 
+  // declare async 
+  // it('should call updateHero when save is called', (done) => {
+  //   mockHeroService.updateHero.and.returnValue(of(null));
+  //   fixture.detectChanges();
+
+  //   fixture.componentInstance.save();
+
+  //   // BAD but will take long time as more async tests
+  //   setTimeout(() => {
+  //     expect(mockHeroService.updateHero).toHaveBeenCalled();
+  //     done();
+  //   }, 300);
+  // })
+
+  // THIS IS PREFERRED!!!!!!!!!!!
+  it('should call updateHero when save is called', fakeAsync(() => {
+    mockHeroService.updateHero.and.returnValue(of(null));
+    fixture.detectChanges();
+
+    fixture.componentInstance.save();
+    // run the clock
+    // tick(250);
+    // just exc all when you don't know the time
+    flush();
+    expect(mockHeroService.updateHero).toHaveBeenCalled();
+  }))
+
+  // it('should call updateHero when save is called', waitForAsync(() => {
+  //   mockHeroService.updateHero.and.returnValue(of(null));
+  //   fixture.detectChanges();
+
+  //   fixture.componentInstance.save();
+
+  //   fixture.whenStable().then(() => {
+  //     expect(mockHeroService.updateHero).toHaveBeenCalled();
+  //   })
+  // }))
 })
